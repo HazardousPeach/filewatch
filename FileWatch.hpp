@@ -86,6 +86,7 @@
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
+#include <filesystem>
 
 #ifdef FILEWATCH_PLATFORM_MAC
 extern "C" int __getdirentries64(int, char *, int, long *);
@@ -685,7 +686,7 @@ namespace filewatch {
 
                   if (IsWChar<C>::value) {
                         size_t needed = mbsrtowcs(nullptr, &str, 0, &state) + 1;
-                        StringType s;
+                        UnderpinningString s;
 
                         s.reserve(needed);
                         mbsrtowcs((wchar_t*)&s[0], &str, s.size(), &state);
